@@ -18,6 +18,8 @@ SizePalette:            equ 0x40
 ; System stuff
 ; ************************************
 hblank_counter          equ 0x00FF0000                                         ; Start of RAM
+vgm_start        	    equ 0x00FF1000
+vgm_current      	    equ 0x00FF1006
 vblank_counter          equ (hblank_counter+SizeLong)
 audio_clock             equ (vblank_counter+SizeLong)
 

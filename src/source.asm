@@ -25,6 +25,7 @@
       include 'framework\utility.asm'
       include 'framework\vdp.asm'
       include 'framework\z80.asm'
+      include 'framework\music_driver.asm'
 
 __main:
 
@@ -115,6 +116,15 @@ __main:
       lea sprite_descriptor_table, a0                                          ; Sprite table data
       move.w #number_of_sprites, d0                                            ; 5 sprites
       jsr LoadSpriteTables
+
+      ; ************************************
+      ; Load music
+      ; ************************************
+      lea (song1)+64,a0                                                        ; song data address in a0
+      move.l a0,vgm_current                                                    ; address of current song
+      move.l a0,vgm_start                                                      ; start of song address
+      move.w #$100,($A11100)                                                   ; z80 bus request
+      move.w #$100,($A11200)                                                   ; z80 reset
 
       ; ************************************
       ;  Draw The Score String
@@ -296,6 +306,8 @@ GameLoop:
       move.w d5, (combo)                                                       ; save the player's combo
 
       jsr WaitVBlankStart                                                      ; Wait for start of vblank
+
+      bsr music_driver                                                         ; play some tunes
 
       lea -$4(sp), sp                                                          ; load effective address of stack pointer
       move.l sp, a0                                                            ; allocate temporary buffer on stack
