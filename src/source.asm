@@ -150,6 +150,7 @@ __main:
       move.w #1, (multiplier)                                                  ; initialize multiplier
       move.w #1, (scoredelta)                                                  ; initalize score delta
       move.w #1, (tempo)                                                       ; initialize tempo
+      move.w #1, (repeat_counter)                                              ; initialize song repetition counter
       move.w #(note_start_position_y+$40), (greennote_position_y)              ; Set green note's y position
       move.w #(note_start_position_y+$30), (rednote_position_y)                ; Set red note's y position
       move.w #(note_start_position_y+$20), (yellownote_position_y)             ; Set yellow note's y position
@@ -307,7 +308,9 @@ GameLoop:
 
       jsr WaitVBlankStart                                                      ; Wait for start of vblank
 
+      move.w (repeat_counter), d0
       bsr music_driver                                                         ; play some tunes
+      move.w d0, (repeat_counter)
 
       lea -$4(sp), sp                                                          ; load effective address of stack pointer
       move.l sp, a0                                                            ; allocate temporary buffer on stack
