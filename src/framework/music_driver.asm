@@ -16,32 +16,32 @@ vgm_loop:
       cmpi.b #$61,d4
       beq wait
       cmpi.b #$66,d4
-      bne @songNotFinished
+      bne.s @songNotFinished
       cmpi.b #255, d0
-      beq @skipUpdateRepeatCounter
+      beq.s @skipUpdateRepeatCounter
       subi #1,d0
 @skipUpdateRepeatCounter:
-      bra loop_playback
+      bra.s loop_playback
 @songNotFinished:
       cmpi.b #$52,d4
-      beq update2612_0
+      beq.s update2612_0
       cmpi.b #$53,d4
-      beq update2612_1
+      beq.s update2612_1
       cmpi.b #$50,d4
-      beq update_psg
-      bra vgm_loop
+      beq.s update_psg
+      bra.s vgm_loop
 	
 update2612_0:
       move.b (a2)+,$A04000
       nop
       move.b (a2)+,$A04001
-      bra vgm_loop
+      bra.s vgm_loop
 	
 update2612_1:
       move.b (a2)+,$A04002
       nop
       move.b (a2)+,$A04003
-      bra vgm_loop
+      bra.s vgm_loop
 	
 loop_playback:
       move.b #$9f,$c00011
@@ -65,7 +65,7 @@ test2612:
       move.b $A04001,d4
       andi.b #$80,d4
       cmpi.b #$80,d4
-      beq test2612
+      beq.s test2612
       rts
 
 return:
