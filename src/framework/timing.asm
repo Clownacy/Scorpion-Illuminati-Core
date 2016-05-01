@@ -9,13 +9,13 @@
 WaitVBlankStart:
 	move.w  vdp_control, d0	; Move VDP status word to d0
 	btst    #0x3, d0     	; vblank state in bit 3
-	beq     WaitVBlankStart ; Branch if equal (to zero)
+	beq.s   WaitVBlankStart ; Branch if equal (to zero)
 	rts
 
 WaitVBlankEnd:
 	move.w  vdp_control, d0	; Move VDP status word to d0
 	btst    #0x3, d0     	; vblank state in bit 3
-	bne     WaitVBlankEnd   ; Branch if equal (to zero)
+	bne.s   WaitVBlankEnd   ; Branch if equal (to zero)
 	rts
 
 WaitFrames:
@@ -27,7 +27,7 @@ WaitFrames:
 	move.l  vblank_counter, d2 ; Get end vblank count
 	subx.l  d1, d2             ; Calc delta, result in d2
 	cmp.l   d0, d2             ; Compare with num frames
-	bge     @End               ; Branch to end if greater or equal to num frames
+	bge.s   @End               ; Branch to end if greater or equal to num frames
 	jmp     @Wait              ; Try again
 	
 	@End:

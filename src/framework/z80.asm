@@ -13,7 +13,7 @@ InitZ80:
 
 	@Wait:
 	btst #0x0, z80_bus_request ; Test bit 0 of A11100 to see if the 68k has access to the Z80 bus yet
-	bne @Wait                  ; If we don't yet have control, branch back up to Wait
+	bne.s @Wait                  ; If we don't yet have control, branch back up to Wait
 	
 	move.l #Z80InitData, a0    ; Load address of data into a0
 	move.l #z80_ram_start, a1  ; Copy Z80 RAM address to a1

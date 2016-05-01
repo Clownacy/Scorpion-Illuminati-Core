@@ -19,7 +19,7 @@ EntryPoint:
 	tst.w reset_exp    ; Test expansion reset
 	bne Main           ; Branch if Not Equal (to zero) - to Main
 	tst.w reset_button ; Test reset button
-	bne Main           ; Branch if Not Equal (to zero) - to Main
+	bne.s Main         ; Branch if Not Equal (to zero) - to Main
    
 	; Clear RAM
 	jsr ClearRAM

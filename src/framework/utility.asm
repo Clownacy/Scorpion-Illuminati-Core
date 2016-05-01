@@ -22,12 +22,12 @@ ItoA_Hex_w:
    move.b d0, d3         ; Byte to d3
    andi.b #0x0F, d3      ; Bottom nybble
    cmp.b  #0x9, d3
-   ble    @Numeric         ; Branch if in numeric range
+   ble.s  @Numeric         ; Branch if in numeric range
    add.b  #(ASCIIAlphaOffset-0xA), d3   ; In alpha range (A - F)
    move.b d3, -(a0)      ; Back to string
    lsr.w  #0x4, d0         ; Next nybble
    dbra   d2, @NybbleLp   ; Loop
-   bra    @End
+   bra.s  @End
 @Numeric:
    add.b  #ASCIINumericOffset, d3   ; In numeric range (0 - 9)
    move.b d3, -(a0)      ; Back to string

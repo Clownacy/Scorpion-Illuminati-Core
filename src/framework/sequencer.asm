@@ -55,7 +55,7 @@ SequencerTest:
 	; Test if clock is within start time of current note
 	; ===================================================
 	cmp.l d1, d0               ; Compare clock with note start time
-	bge @WithinStartTime       ; Branch if Greater or Equal
+	bge.s @WithinStartTime     ; Branch if Greater or Equal
 	move.b #0x9F, psg_control  ; Not yet reached start time of note, silence channel 0
 	jmp @ProcessNote           ; Jump back to top to evaluate again
 	
@@ -65,7 +65,7 @@ SequencerTest:
 	; Test if clock is within release time of current note
 	; ===================================================
 	cmp.l d2, d0               ; Compare clock with note end time
-	blt @WithinRelease         ; Branch if Less Than
+	blt.s @WithinRelease       ; Branch if Less Than
 	move.b #0x9F, psg_control  ; End of note, silence channel 0
 	addi.l #0x6, a0            ; Increment a0 by 3 words
 	jmp @ProcessNote           ; Jump back to top to evaluate next note
@@ -98,7 +98,7 @@ SequencerTest:
 	move.b (a1,d3.w), d3       ; Attack time from 2nd byte of envelope
 	add.l d1, d2               ; Add to note on time
 	cmp.l d2, d0               ; Compare with audio clock
-	bge @PassedAttack          ; Branch if Greater or Equal
+	bge.s @PassedAttack          ; Branch if Greater or Equal
 	;;Inside attack time
 	
 	@PassedAttack:
@@ -106,7 +106,7 @@ SequencerTest:
 	move.b (a1,d3.w), d3       ; Decay time from 3rd byte of envelope
 	add.l d1, d2               ; Add to note on time
 	cmp.l d2, d0               ; Compare with audio clock
-	bge @PassedDecay          ; Branch if Greater or Equal
+	bge.s @PassedDecay          ; Branch if Greater or Equal
 	;;Inside decay time
 	
 	@PassedDecay:

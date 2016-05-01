@@ -97,7 +97,7 @@ FindFloor:
 	add.w  #0x1, d6					 ; Increment Y coord
 	sub.b  #0x1, d3					 ; Decrement lines remaning in tile
 	cmpi.b #0x0, d3					 ; Check if no lines remaining in tile
-	bne    @LinesRemaining
+	bne.s  @LinesRemaining
 	
 	; No lines remaining in current tile, get next tile down
 	clr.l  d1
@@ -113,19 +113,19 @@ FindFloor:
 	; Check collision byte
 	@LinesRemaining:
 	cmpi.b #0x0, d2    			     ; Check if byte nonzero
-	bne    @CheckNybble				 ; If byte nonzero, check nybble
+	bne.s  @CheckNybble				 ; If byte nonzero, check nybble
 	dbra   d0, @CollisionByteCheckLp ; Collision not found (probe length in d0)
-	bra	   @EndCheck				 ; End of data
+	bra.s  @EndCheck				 ; End of data
 	
 	; Check collision nybble
 	@CheckNybble:
 	btst   #0x1, d5				     ; Determine if the odd or even nybble is to be tested
-	bne    @CheckUpperNybble
+	bne.s  @CheckUpperNybble
 	lsr.b  #0x4, d2					 ; Shift to lower nybble
 	@CheckUpperNybble:
 	andi.b #0x0F, d2				 ; Clear upper nybble
 	btst   #col_bit_floor, d2		 ; Check for floor bit
-	bne    @EndCheck				 ; Collision found
+	bne.s  @EndCheck				 ; Collision found
 	dbra   d0, @CollisionByteCheckLp ; Collision not found (probe length in d0)
 
 	@EndCheck:
@@ -135,7 +135,7 @@ FindFloor:
 	; Finished search
 	clr.l  d1		   ; Clear return reg
 	cmp.w  #0xFFFF, d0 ; d0 holds lines remaining, -1 if loop finished
-	beq    @Return     ; No collision found
+	beq.s  @Return     ; No collision found
 	
 	; Floor found, move to return reg
 	move.w  d6, d1

@@ -23,11 +23,11 @@ CompareString:
 
         ; Compare chars (BEFORE checking EOS, lengths may differ)
         sub.b d1, d2     ; Compare chars
-        bne strcmp_diff  ; Chars differ, return
+        bne.s strcmp_diff  ; Chars differ, return
 
         ; Check for end of string
         cmp.b #0x0, d1   ; Check char 1 for 0
-        beq strcmp_end   ; End of string, return
+        beq.s strcmp_end   ; End of string, return
         
         addi #0x1, d3    ; Increment char counter
         jmp @strchecklp
@@ -50,7 +50,7 @@ GetMCDType:
         lea mcd_bios_addr_1+mcd_sig_offset, a1
         jsr CompareString
         cmp.b #0x0, d0
-        bne @NotType1
+        bne.s @NotType1
         move.l #0x1, d1 ; Found type 1
         rts
 
@@ -59,7 +59,7 @@ GetMCDType:
         lea mcd_bios_addr_2+mcd_sig_offset, a1
         jsr CompareString
         cmp.b #0x0, d0
-        bne @NotType2
+        bne.s @NotType2
         move.l #0x2, d1 ; Found type 2
         rts
 
@@ -68,7 +68,7 @@ GetMCDType:
         lea mcd_bios_addr_3+mcd_sig_offset, a1
         jsr CompareString
         cmp.b #0x0, d0
-        bne @NotType3
+        bne.s @NotType3
         move.l #0x3, d1 ; Found type 3
         rts
 
@@ -77,7 +77,7 @@ GetMCDType:
         lea mcd_bios_addr_4+mcd_sig_offset, a1
         jsr CompareString
         cmp.b #0x0, d0
-        bne @NotType4
+        bne.s @NotType4
         move.l #0x4, d1 ; Found type 4
         rts
 
@@ -91,7 +91,7 @@ MCD_RestoreHINT:
         move.w #HBlankInterrupt, (0x00A12006).l
         move.l #SubCPU_rte, (0xFFFFFD0E).w
 
-		rts
+	rts
 
 ; Initialise MegaCD in Mode 1 (boot from cartridge)
 InitMCD_Mode1:
@@ -112,7 +112,7 @@ InitMCD_Mode1:
         move.b #0x02, 0x00A12001 ; Reset, request bus
         move.b 0x00A12001, d0    ; Check for bus access
         btst #0x1, d0
-        beq @WaitForBus
+        beq.s @WaitForBus
 
         move.b #0x00, 0x00A1200E ; Clear main comm port
         move.b #0x2A, 0x00A12002 ; Write protect up to 0x00005400
@@ -122,7 +122,7 @@ InitMCD_Mode1:
         move.b #0x01, 0x00A12001 ; Clear bus req, run SUB-CPU
         move.b 0x00A12001, d0    ; Check if running
         btst #0x0, d0
-        beq @WaitForRun
+        beq.s @WaitForRun
 
         rts
 

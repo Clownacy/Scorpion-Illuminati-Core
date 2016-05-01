@@ -51,7 +51,7 @@ DrawTextPlaneA:
 	@CharCopy:
 	move.b   (a0)+, d2              ; Move ASCII byte to lower byte of d2
 	cmp.b    #0x0, d2               ; Test if byte is zero (string terminator)
-	beq      @End                   ; If byte was zero, branch to end
+	beq.s    @End                   ; If byte was zero, branch to end
 
 	sub.b    #ASCIIStart, d2        ; Subtract first ASCII code to get table entry index
 	move.b   (a1,d2.w), d3          ; Move tile ID from table (index in lower word of d2) to lower byte of d3

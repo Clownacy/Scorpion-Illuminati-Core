@@ -87,7 +87,7 @@ SetSpritePosX:
 	
 	; Correct X coord for flipping
 	cmp.b #0x0, d4
-	beq   @NoFlipX
+	beq.s @NoFlipX
 	add.w d3, d1	; Flipped, working from right to left
 	@NoFlipX:
 		
@@ -105,7 +105,7 @@ SetSpritePosX:
 	
 		; If flipped, pre-decrement X pos
 		cmp.b #0x0, d4
-		beq   @NoPreDec
+		beq.s @NoPreDec
 		sub.w  d5, d1       ; Working right to left, sub width
 		@NoPreDec:
 			
@@ -135,7 +135,7 @@ SetSpritePosX:
 			
 		; If not flipped, post-increment X pos
 		cmp.b #0x0, d4
-		bne   @NoPostInc
+		bne.s @NoPostInc
 		add.w  d5, d1       ; Working left to right, add width
 		@NoPostInc:
 
@@ -154,7 +154,7 @@ SetSpritePosY:
 	
 	; Correct Y coord for flipping
 	cmp.b #0x0, d4
-	beq   @NoFlipY
+	beq.s @NoFlipY
 	add.w d3, d1	; Flipped, working from bottom to top
 	@NoFlipY:
 	
@@ -180,7 +180,7 @@ SetSpritePosY:
 		
 			; If flipped, pre-decrement Y pos
 			cmp.b #0x0, d4
-			beq   @NoPreDec
+			beq.s @NoPreDec
 			move.w (a1)+, d7	; Get subsprite width/height from dimensions array
 			andi.w #0xFF, d7	; Get height
 			mulu   #0x8, d7		; To pixels
@@ -202,7 +202,7 @@ SetSpritePosY:
 		
 			; If not flipped, post-increment Y pos
 			cmp.b #0x0, d4
-			bne   @NoPostInc
+			bne.s @NoPostInc
 			move.w (a1)+, d7	; Get subsprite width/height from dimensions array
 			andi.w #0xFF, d7	; Get height
 			mulu   #0x8, d7		; To pixels
@@ -338,7 +338,7 @@ GetNextSpriteFrame:
 	move.b (a2), d3        ; Read current anim frame number (d3)
 	addi.b #0x1, (a2)      ; Advance frame number
 	cmp.b  d3, d1          ; Check new frame count with num anim frames
-	bne    @NotAtEnd       ; Branch if we haven't reached the end of anim
+	bne.s  @NotAtEnd       ; Branch if we haven't reached the end of anim
 	move.b #0x0, (a2)      ; At end of anim, wrap frame counter back to zero
 	@NotAtEnd:
 
@@ -385,7 +385,7 @@ AnimateSpriteFwd:
 	move.b d3, d4		   ; Backup
 	addi.b #0x1, d3        ; Advance frame number
 	cmp.b  d3, d2          ; Check new frame count against num anim frames
-	bne    @NotAtEnd       ; Branch if we haven't reached the end of anim
+	bne.s  @NotAtEnd       ; Branch if we haven't reached the end of anim
 	move.b #0x0, d3        ; At end of anim, wrap frame counter back to zero
 	@NotAtEnd:
 	move.b d3, (a2)		   ; Frame count back to RAM
@@ -394,7 +394,7 @@ AnimateSpriteFwd:
 	move.b (a1,d3.w), d3   ; Get next frame index (d5) from anim data array
 
 	cmp.b  d3, d4          ; Has anim frame index changed?
-	beq    @NoChange       ; If not, there's nothing more to do
+	beq.s  @NoChange       ; If not, there's nothing more to do
 
 	; spriteDataAddr = spriteDataAddr + (sizeOfFrame * newTileID)
 	move.l a0, d2          ; Move sprite data ROM address to d2 (can't do maths on address registers)
