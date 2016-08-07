@@ -7,14 +7,15 @@
 ; ************************************
 ; Art asset VRAM mapping
 ; ************************************
-PixelFontVRAM:     equ 0x0000
-GameTilesVRAM:     equ PixelFontVRAM+PixelFontSizeB
-RockIndicatorVRAM: equ GameTilesVRAM+GameTilesSizeB
-GreenNoteVRAM:     equ RockIndicatorVRAM+RockIndicatorSizeB
-RedNoteVRAM:       equ GreenNoteVRAM+GreenNoteSizeB
-YellowNoteVRAM:    equ RedNoteVRAM+RedNoteSizeB
-BlueNoteVRAM:      equ YellowNoteVRAM+YellowNoteSizeB
-OrangeNoteVRAM:    equ BlueNoteVRAM+BlueNoteSizeB
+PixelFontVRAM:            equ 0x0000
+TitleScreenTilesVRAM:     equ PixelFontVRAM+PixelFontSizeB
+GameTilesVRAM:            equ TitlescreenTilesVRAM+TitleScreenTilesSizeB
+RockIndicatorVRAM:        equ GameTilesVRAM+GameTilesSizeB
+GreenNoteVRAM:            equ RockIndicatorVRAM+RockIndicatorSizeB
+RedNoteVRAM:              equ GreenNoteVRAM+GreenNoteSizeB
+YellowNoteVRAM:           equ RedNoteVRAM+RedNoteSizeB
+BlueNoteVRAM:             equ YellowNoteVRAM+YellowNoteSizeB
+OrangeNoteVRAM:           equ BlueNoteVRAM+BlueNoteSizeB
 
 ; ************************************
 ; Include all art assets
@@ -26,7 +27,9 @@ OrangeNoteVRAM:    equ BlueNoteVRAM+BlueNoteSizeB
       include assets\sprites\bluenote.asm
       include assets\sprites\orangenote.asm
       include assets\sprites\rockindicator.asm
+      include assets\tiles\titlescreentiles.asm
       include assets\tiles\gametiles.asm
+      include assets\maps\titlescreenmap.asm
       include assets\maps\gamemap.asm
 
 ; ************************************
