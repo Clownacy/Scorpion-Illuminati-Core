@@ -26,7 +26,8 @@ audio_clock             equ (vblank_counter+SizeLong)
 ; ************************************
 ; Game globals
 ; ************************************
-score                    equ (audio_clock+SizeWord)
+game_state               equ (audio_clock+SizeWord)
+score                    equ (game_state+SizeWord)
 combo                    equ (score+SizeWord)
 multiplier               equ (combo+SizeWord)
 scoredelta               equ (multiplier+sizeWord)
