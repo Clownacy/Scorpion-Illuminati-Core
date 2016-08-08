@@ -10,7 +10,7 @@
       ; include framework code
       include 'framework\init.asm'
       include 'framework\collision.asm'
-      include 'framework\debugger.asm'                                        ; NOT FOR RELEASE
+      include 'framework\debugger.asm'                                         ; NOT FOR RELEASE
       include 'framework\gamepad.asm'
       include 'framework\interrupts.asm'
       include 'framework\megacd.asm'
@@ -37,7 +37,25 @@ __main:
 	  jsr LoadPalette                                                        ; Jump to subroutine
 
       ; ************************************
-      ; Load map tiles
+      ; Load title screen map tiles
+      ; ************************************
+      lea TitleScreenTiles, a0                                                 ; Move sprite address to a0
+      move.l #TitleScreenTilesVRAM, d0                                         ; Move VRAM dest address to d0
+      move.l #TitleScreenTilesSizeT, d1                                        ; Move number of tiles to d1
+      jsr LoadTiles                                                            ; Jump to subroutine
+
+      ; ************************************
+      ; Load title screen map
+      ; ************************************
+      lea TitleScreenMap, a0                                                   ; Map data in a0
+      move.w #TitleScreenMapSizeW, d0                                          ; Size (words) in d0
+      moveq #0x0, d1                                                           ; Y offset in d1
+      move.w #TitleScreenTilesTileID, d2                                       ; First tile ID in d2
+      moveq #0x0, d3                                                           ; Palette ID in d3
+      jsr LoadMapPlaneA                                                        ; Jump to subroutine
+
+      ; ************************************
+      ; Load game map tiles
       ; ************************************
       lea GameTiles, a0                                                        ; Move sprite address to a0
       move.l #GameTilesVRAM, d0                                                ; Move VRAM dest address to d0
@@ -45,7 +63,7 @@ __main:
       jsr LoadTiles                                                            ; Jump to subroutine
 
       ; ************************************
-      ; Load map
+      ; Load game map
       ; ************************************
       lea GameMap, a0                                                          ; Map data in a0
       move.w #GameMapSizeW, d0                                                 ; Size (words) in d0
@@ -157,6 +175,7 @@ __main:
       move.w #(note_start_position_y+$10), (bluenote_position_y)               ; Set blue note's y position
       move.w #note_start_position_y, (orangenote_position_y)                   ; Set orange note's y position
       move.w #rockindicator_start_position_x, (rockindicator_position_x)       ; Set rock indicator's x position
+      move.w #game_state_title_screen_initalize, (game_state)                  ; set game state to title screen
 
       ; ******************************************************************
       ; Main game loop
@@ -164,6 +183,11 @@ __main:
 GameLoop:
 
       jsr ReadPadA                                                             ; Read pad 1 state, result in d0
+
+      btst #pad_button_start, d0                                               ; was the start button pressed?
+      bne.s @NoStart                                                           ; if not then skip the start button code
+      nop                                                                      ; temporary placeholder
+@NoStart:
 
       move.w #(note_plane_safearea_offset+note_bounds_top), d2                 ; fret safe area offset in d2
       move.w (score), d3                                                       ; player's score into d3
