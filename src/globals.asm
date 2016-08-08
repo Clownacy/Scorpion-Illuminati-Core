@@ -13,6 +13,12 @@ screen_height        equ 0x00E0                                                ;
 screen_border_x      equ 0x0010
 screen_border_y      equ 0x0010
 
+; game state constants
+game_state_title_screen_initalize equ 0x0000
+game_state_title_screen           equ 0x0001
+game_state_game_mode_initalize    equ 0x0002
+game_state_game_mode              equ 0x0004
+
 ; note collision bounds
 note_bounds_top      equ 0x0000
 note_bounds_bottom   equ 0x0008
