@@ -39,3 +39,5 @@ rednote_position_y       equ (greennote_position_y+SizeWord)
 yellownote_position_y    equ (rednote_position_y+SizeWord)
 bluenote_position_y      equ (yellownote_position_y+SizeWord)
 orangenote_position_y    equ (bluenote_position_y+SizeWord)
+
+__ramend                 equ (orangenote_position_y+SizeByte)
