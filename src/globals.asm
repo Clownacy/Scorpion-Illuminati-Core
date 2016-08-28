@@ -26,8 +26,8 @@ note_bounds_left     equ 0x0000
 note_bounds_right    equ 0x0008
 
 ; object offbounds positions
-offscreen_position_x:  equ 0x0090
-offscreen_position_y:  equ 0x0090
+offscreen_position_x:  equ 0x0000
+offscreen_position_y:  equ 0x0000
 
 ; position for rock indicator
 rockindicator_start_position_y:  equ 0x0150
