@@ -81,7 +81,7 @@ __start:
       dc.b "Scorpion Illuminati                             "                  ; International name
       dc.b "GM XXXXXXXX-00"                                                    ; Version number
       dc.w 0x0000                                                              ; Checksum
-      dc.b "J               "                                                  ; I/O support
+      dc.b "J6              "                                                  ; I/O support
       dc.l __start                                                             ; Start address of ROM
       dc.l __end-1                                                             ; End address of ROM
       dc.l 0x00FF0000                                                          ; Start address of RAM
