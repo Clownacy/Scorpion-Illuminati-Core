@@ -80,18 +80,18 @@ __start:
       dc.b "Scorpion Illuminati                             "                  ; Domestic name
       dc.b "Scorpion Illuminati                             "                  ; International name
       dc.b "GM XXXXXXXX-00"                                                    ; Version number
-      dc.w 0x0000                                                              ; Checksum
+      dc.b "  "                                                                ; Checksum
       dc.b "J6              "                                                  ; I/O support
       dc.l __start                                                             ; Start address of ROM
       dc.l __end-1                                                             ; End address of ROM
       dc.l 0x00FF0000                                                          ; Start address of RAM
       dc.l 0x00FFFFFF                                                          ; End address of RAM
-      dc.l 0x00000000                                                          ; SRAM enabled
-      dc.l 0x00000000                                                          ; Unused
-      dc.l 0x00000000                                                          ; Start address of SRAM
-      dc.l 0x00000000                                                          ; End address of SRAM
-      dc.l 0x00000000                                                          ; Unused
-      dc.l 0x00000000                                                          ; Unused
+      dc.b "    "                                                              ; SRAM enabled
+      dc.b "    "                                                              ; Unused
+      dc.b "    "                                                              ; Start address of SRAM
+      dc.b "    "                                                              ; End address of SRAM
+      dc.b "    "                                                              ; Unused
+      dc.b "    "                                                              ; Unused
       dc.b "                                        "                          ; Notes (unused)
       dc.b "F               "                                                  ; Country codes
       ;*******************************************************************
