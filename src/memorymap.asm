@@ -17,27 +17,28 @@ SizePalette:            equ 0x40
 ; ************************************
 ; System stuff
 ; ************************************
-hblank_counter          equ 0x00FF0000                                         ; Start of RAM
+    rsset 0x00FF0000
+hblank_counter          rs.w 1                                         ; Start of RAM
 vgm_start        	    equ 0x00FF1000
 vgm_current      	    equ 0x00FF1006
-vblank_counter          equ (hblank_counter+SizeLong)
-audio_clock             equ (vblank_counter+SizeLong)
+vblank_counter          rs.l 1
+audio_clock             rs.l 1
 
 ; ************************************
 ; Game globals
 ; ************************************
-game_state               equ (audio_clock+SizeWord)
-score                    equ (game_state+SizeWord)
-combo                    equ (score+SizeWord)
-multiplier               equ (combo+SizeWord)
-scoredelta               equ (multiplier+sizeWord)
-rockindicator_position_x equ (scoredelta+SizeWord)
-tempo                    equ (rockindicator_position_x+SizeWord)
-repeat_counter           equ (tempo+SizeWord)
-greennote_position_y     equ (repeat_counter+SizeWord)
-rednote_position_y       equ (greennote_position_y+SizeWord)
-yellownote_position_y    equ (rednote_position_y+SizeWord)
-bluenote_position_y      equ (yellownote_position_y+SizeWord)
-orangenote_position_y    equ (bluenote_position_y+SizeWord)
+game_state               rs.w 1
+score                    rs.w 1
+combo                    rs.w 1
+multiplier               rs.w 1
+scoredelta               rs.w 1
+rockindicator_position_x rs.w 1
+tempo                    rs.w 1
+repeat_counter           rs.w 1
+greennote_position_y     rs.w 1
+rednote_position_y       rs.w 1
+yellownote_position_y    rs.w 1
+bluenote_position_y      rs.w 1
+orangenote_position_y    rs.w 1
 
-__ramend                 equ (orangenote_position_y+SizeByte)
+__ramend                 rs.b 1
