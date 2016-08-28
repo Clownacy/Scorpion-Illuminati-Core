@@ -59,33 +59,6 @@ GameTiles:
       dc.l	$07755770                                                          ;  XX  XX 
       dc.l	$00777700                                                          ;   XXXX  
 
-      dc.l	$55555555                                                          ; XXXXXXXX
-      dc.l	$22222222                                                          ; XXXXXXXX
-      dc.l	$22222222                                                          ; XXXXXXXX
-      dc.l	$22222222                                                          ; XXXXXXXX
-      dc.l	$22222222                                                          ; XXXXXXXX
-      dc.l	$22222222                                                          ; XXXXXXXX
-      dc.l	$22222222                                                          ; XXXXXXXX
-      dc.l	$55555555                                                          ; XXXXXXXX
-
-      dc.l	$55555555                                                          ; XXXXXXXX
-      dc.l	$66666666                                                          ; XXXXXXXX
-      dc.l	$66666666                                                          ; XXXXXXXX
-      dc.l	$66666666                                                          ; XXXXXXXX
-      dc.l	$66666666                                                          ; XXXXXXXX
-      dc.l	$66666666                                                          ; XXXXXXXX
-      dc.l	$66666666                                                          ; XXXXXXXX
-      dc.l	$55555555                                                          ; XXXXXXXX
-
-      dc.l	$55555555                                                          ; XXXXXXXX
-      dc.l	$11111111                                                          ; XXXXXXXX
-      dc.l	$11111111                                                          ; XXXXXXXX
-      dc.l	$11111111                                                          ; XXXXXXXX
-      dc.l	$11111111                                                          ; XXXXXXXX
-      dc.l	$11111111                                                          ; XXXXXXXX
-      dc.l	$11111111                                                          ; XXXXXXXX
-      dc.l	$55555555                                                          ; XXXXXXXX
-
 GameTilesEnd                                                                   ; Tiles end address
 GameTilesSizeB: equ (GameTilesEnd-GameTiles)                                   ; Tiles size in bytes
 GameTilesSizeW: equ (GameTilesSizeB/SizeWord)                                  ; Tiles size in words
