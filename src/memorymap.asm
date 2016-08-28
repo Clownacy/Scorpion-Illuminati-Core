@@ -41,4 +41,4 @@ yellownote_position_y    rs.w 1
 bluenote_position_y      rs.w 1
 orangenote_position_y    rs.w 1
 
-__ramend                 rs.b 1
+__ramend                 rs.b 0
