@@ -1,13 +1,5 @@
 GameMode_Init:
       ; ************************************
-      ; Load game map tiles
-      ; ************************************
-      lea GameTiles, a0                                                        ; Move sprite address to a0
-      move.l #GameTilesVRAM, d0                                                ; Move VRAM dest address to d0
-      move.l #GameTilesSizeT, d1                                               ; Move number of tiles to d1
-      jsr LoadTiles                                                            ; Jump to subroutine
-
-      ; ************************************
       ; Load game map
       ; ************************************
       lea GameMap, a0                                                          ; Map data in a0

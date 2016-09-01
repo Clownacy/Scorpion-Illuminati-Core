@@ -104,6 +104,22 @@ __main:
       jsr LoadSpriteTables
 
       ; ************************************
+      ; Load title screen map tiles
+      ; ************************************
+      lea TitleScreenTiles, a0                                                 ; Move sprite address to a0
+      move.l #TitleScreenTilesVRAM, d0                                         ; Move VRAM dest address to d0
+      move.l #TitleScreenTilesSizeT, d1                                        ; Move number of tiles to d1
+      jsr LoadTiles                                                            ; Jump to subroutine
+
+      ; ************************************
+      ; Load game map tiles
+      ; ************************************
+      lea GameTiles, a0                                                        ; Move sprite address to a0
+      move.l #GameTilesVRAM, d0                                                ; Move VRAM dest address to d0
+      move.l #GameTilesSizeT, d1                                               ; Move number of tiles to d1
+      jsr LoadTiles                                                            ; Jump to subroutine
+
+      ; ************************************
       ; Load music
       ; ************************************
       lea (song1)+64,a0                                                        ; song data address in a0
