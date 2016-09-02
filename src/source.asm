@@ -25,7 +25,7 @@
       include 'framework\utility.asm'
       include 'framework\vdp.asm'
       include 'framework\z80.asm'
-      include 'framework\music_driver.asm'
+      include 'framework\VGM_player.asm'
       include 'gamestate_titlescreen_init.asm'
       include 'gamestate_titlescreen.asm'
       include 'gamestate_gamemode_init.asm'
@@ -122,9 +122,9 @@ __main:
       ; ************************************
       ; Load music
       ; ************************************
-      lea (song1)+64,a0                                                        ; song data address in a0
-      move.l a0,vgm_current                                                    ; address of current song
-      move.l a0,vgm_start                                                      ; start of song address
+      lea (song1).l,a0                                                         ; song data address in a0
+      moveq #0,d0                                                              ; loop number in d0 (loop zero times)
+      jsr PlayVGM
       move.w #$100,($A11100)                                                   ; z80 bus request
       move.w #$100,($A11200)                                                   ; z80 reset
 

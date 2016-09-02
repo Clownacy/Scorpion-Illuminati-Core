@@ -143,9 +143,7 @@ GameMode:
 
       jsr WaitVBlankStart                                                      ; Wait for start of vblank
 
-      move.w (repeat_counter), d0
-      bsr music_driver                                                         ; play some tunes
-      move.w d0, (repeat_counter)
+      bsr UpdateVGMPlayer                                                      ; play some tunes
 
       lea -$4(sp), sp                                                          ; load effective address of stack pointer
       move.l sp, a0                                                            ; allocate temporary buffer on stack
