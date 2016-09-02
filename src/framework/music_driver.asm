@@ -9,8 +9,6 @@ music_driver:
       move.l d4,-(sp)
       move.l vgm_current,a2
 vgm_loop:		
-      clr d4
-      bsr test2612
       move.b (a2)+,d4
       move.l a2,vgm_current
       cmpi.b #$61,d4
@@ -38,14 +36,14 @@ vgm_loop:
 update2612_0:
       bsr.s test2612
       move.b (a2)+,$A04000
-      nop
+      bsr.s test2612
       move.b (a2)+,$A04001
       bra.s vgm_loop
 	
 update2612_1:
       bsr.s test2612
       move.b (a2)+,$A04002
-      nop
+      bsr.s test2612
       move.b (a2)+,$A04003
       bra.s vgm_loop
 	
