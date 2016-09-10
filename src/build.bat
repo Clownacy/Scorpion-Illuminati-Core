@@ -9,7 +9,7 @@ rem /p pure binary
 rem /o enable optimisations
 rem ow+ optimise absolute long addressing
 @echo on
-asm68k.exe /k /p /o ow+ source.asm,../bin/rom.bin
+asm68k.exe /k /p /o ow+ source.asm,../bin/rom.bin, , rom.lst
 
 @echo off
 rem fix the rom header (checksum)
