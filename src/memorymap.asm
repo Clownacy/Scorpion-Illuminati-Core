@@ -23,6 +23,8 @@ vgm_start        	    equ 0x00FF1000
 vgm_current      	    equ 0x00FF1006
 vblank_counter          rs.l 1
 audio_clock             rs.l 1
+joypadA			rs.w 1
+joypadB			rs.w 1
 
 ; ************************************
 ; Game globals
