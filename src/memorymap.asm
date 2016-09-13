@@ -24,7 +24,9 @@ vgm_current      	    equ 0x00FF1006
 vblank_counter          rs.l 1
 audio_clock             rs.l 1
 joypadA			rs.w 1
+joypadA_press		rs.w 1
 joypadB			rs.w 1
+joypadB_press		rs.w 1
 
 ; ************************************
 ; Game globals

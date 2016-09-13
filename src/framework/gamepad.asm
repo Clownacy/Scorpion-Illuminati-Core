@@ -48,6 +48,12 @@ ReadPadA:
 	andi.w	#0xF, d1		    ; d1.b = 0 | 0 | 0 | 0 | M | X | Y | Z
 	lsl.w	#0x8, d1		    ; d1.w = 0 | 0 | 0 | 0 | M | X | Y | Z | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 	or.w	d1, d0			    ; d0.w = 0 | 0 | 0 | 0 | M | X | Y | Z | S | A | C | B | R | L | D | U |
+	move.w	joypadA, d1
+	eor.w	d0, d1
+	and.w	d0, d1
+	not.w	d1
+	move.w	d0, joypadA
+	move.w	d1, joypadA_press
     rts
 
 ReadPadB:
@@ -82,4 +88,10 @@ ReadPadB:
 	andi.w	#0xF, d1		    ; d1.b = 0 | 0 | 0 | 0 | M | X | Y | Z
 	lsl.w	#0x8, d1		    ; d1.w = 0 | 0 | 0 | 0 | M | X | Y | Z | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 	or.w	d1, d0			    ; d0.w = 0 | 0 | 0 | 0 | M | X | Y | Z | S | A | C | B | R | L | D | U |
+	move.w	joypadB, d1
+	eor.w	d0, d1
+	and.w	d0, d1
+	not.w	d1
+	move.w	d0, joypadB
+	move.w	d1, joypadB_press
     rts
