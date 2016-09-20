@@ -1,4 +1,6 @@
 GameMode_Init:
+      moveq #0x1, d0
+      jsr WaitFrames ; Wait a frame, to collect new joypad presses
       ; ************************************
       ; Load game map
       ; ************************************

@@ -11,8 +11,18 @@ HBlankInterrupt:
    rte
 
 VBlankInterrupt:
+   ; Backup registers
+   movem.l d0-a7,-(sp)
+
+   ; Cache Joypad inputs
+   jsr ReadPadA
+   jsr ReadPadB
+
    addi.l #0x1, vblank_counter    ; Increment vinterrupt counter
    TRAP #0 ; Sync with debugger - NOT FOR RELEASE
+
+   ; Restore registers
+   movem.l (sp)+,d0-a7
    rte
 
 Exception:

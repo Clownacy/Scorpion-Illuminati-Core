@@ -1,5 +1,5 @@
 GameMode:
-      jsr ReadPadA                                                             ; Read pad 1 state, result in d0
+      move.w joypadA, d0                                                             ; Read pad 1 state, result in d0
       move.w #(note_plane_safearea_offset+note_bounds_top), d2                 ; fret safe area offset in d2
       move.w (score), d3                                                       ; player's score into d3
       move.w (scoredelta), d4

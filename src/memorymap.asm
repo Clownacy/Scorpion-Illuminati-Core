@@ -18,9 +18,13 @@ SizePalette:            equ 0x40
 ; System stuff
 ; ************************************
     rsset 0x00FF0000
-hblank_counter          rs.w 1                                         ; Start of RAM
+hblank_counter          rs.l 1                                         ; Start of RAM
 vblank_counter          rs.l 1
 audio_clock             rs.l 1
+joypadA			rs.w 1
+joypadA_press		rs.w 1
+joypadB			rs.w 1
+joypadB_press		rs.w 1
 
 ; ************************************
 ; Game globals
