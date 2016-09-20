@@ -18,7 +18,7 @@ SizePalette:            equ 0x40
 ; System stuff
 ; ************************************
     rsset 0x00FF0000
-hblank_counter          rs.w 1                                         ; Start of RAM
+hblank_counter          rs.l 1                                         ; Start of RAM
 vgm_start        	    equ 0x00FF1000
 vgm_current      	    equ 0x00FF1006
 vblank_counter          rs.l 1
