@@ -30,6 +30,8 @@
       include 'gamestate_titlescreen.asm'
       include 'gamestate_gamemode_init.asm'
       include 'gamestate_gamemode.asm'
+      include 'gamestate_gamemode_pause_init.asm'
+      include 'gamestate_gamemode_pause.asm'
 
 __main:
 
@@ -150,6 +152,8 @@ GameLoop:
       bra.w   TitleScreen                                                      ; (1)
       bra.w   GameMode_Init                                                    ; (2)
       bra.w   GameMode                                                         ; (3)
+      bra.w   Pause_Init                                                       ; (4)
+      bra.w   Pause                                                            ; (5)
 
       jsr WaitVBlankEnd                                                        ; Wait for end of vblank
 
