@@ -1,5 +1,9 @@
 GameMode:
-      move.w joypadA, d0                                                             ; Read pad 1 state, result in d0
+      move.w joypadA, d0                                                 ; Read pad 1 state, result in d0
+      btst #pad_button_start, d0                                               ; was the start button pressed
+      bne.s @NoStart                                                           ; otherwise branch
+      move.w #0x04, game_state                                                 ; set game state to game mode
+@NoStart:
       move.w #(note_plane_safearea_offset+note_bounds_top), d2                 ; fret safe area offset in d2
       move.w (score), d3                                                       ; player's score into d3
       move.w (scoredelta), d4
