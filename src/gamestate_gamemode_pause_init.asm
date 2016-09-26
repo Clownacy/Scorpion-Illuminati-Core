@@ -1,5 +1,5 @@
 Pause_Init:
-      moveq #0x8, d0
+      moveq #0x1, d0
       jsr WaitFrames                                                           ; Wait a frame, to collect new joypad presses
       lea PauseString, a0                                                      ; String address
       move.l #PixelFontTileID, d0                                              ; First tile id

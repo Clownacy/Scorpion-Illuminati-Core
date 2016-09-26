@@ -1,5 +1,5 @@
 GameMode:
-      move.w joypadA, d0                                                 ; Read pad 1 state, result in d0
+      move.w joypadA_press, d0                                                 ; Read pad 1 state, result in d0
       btst #pad_button_start, d0                                               ; was the start button pressed
       beq.s @NoStart                                                           ; otherwise branch
       move.w #0x04, game_state                                                 ; set game state to pause init
@@ -12,6 +12,7 @@ GameMode:
 
       ; start of green note code
       move.w (greennote_position_y), d1                                        ; green note position in d1
+      move.w joypadA, d0                                                       ; Read pad 1 state, result in d0
       btst #pad_button_left, d0                                                ; Check left pad
       beq.s @NoLeft                                                            ; Branch if button off
       cmp.w d2, d1                                                             ; is the player pressing too early
