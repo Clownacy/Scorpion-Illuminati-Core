@@ -1,7 +1,7 @@
 GameMode:
       move.w joypadA, d0                                                 ; Read pad 1 state, result in d0
       btst #pad_button_start, d0                                               ; was the start button pressed
-      bne.s @NoStart                                                           ; otherwise branch
+      beq.s @NoStart                                                           ; otherwise branch
       move.w #0x04, game_state                                                 ; set game state to pause init
 @NoStart:
       move.w #(note_plane_safearea_offset+note_bounds_top), d2                 ; fret safe area offset in d2
@@ -13,7 +13,7 @@ GameMode:
       ; start of green note code
       move.w (greennote_position_y), d1                                        ; green note position in d1
       btst #pad_button_left, d0                                                ; Check left pad
-      bne.s @NoLeft                                                            ; Branch if button off
+      beq.s @NoLeft                                                            ; Branch if button off
       cmp.w d2, d1                                                             ; is the player pressing too early
       blt.s @GreenNoteSafeArea                                                 ; if so then don't accept it
       move.w #note_start_position_y, d1
@@ -35,7 +35,7 @@ GameMode:
       ; start of red note code
       move.w (rednote_position_y), d1                                          ; red note position in d1
       btst #pad_button_right, d0                                               ; Check right pad
-      bne.s @NoRight                                                           ; Branch if button off
+      beq.s @NoRight                                                           ; Branch if button off
       cmp.w d2, d1                                                             ; is the player pressing too early
       blt.s @RedNoteSafeArea                                                   ; if so then don't accept it
       move.w #note_start_position_y, d1
@@ -57,7 +57,7 @@ GameMode:
       ; start of yellow note code
       move.w (yellownote_position_y), d1                                       ; yellow note position in d1
       btst #pad_button_A, d0                                                   ; Check A button
-      bne.s @NoA                                                               ; Branch if button off
+      beq.s @NoA                                                               ; Branch if button off
       cmp.w d2, d1                                                             ; is the player pressing too early
       blt.s @YellowNoteSafeArea                                                ; if so then don't accept it
       move.w #note_start_position_y, d1
@@ -79,7 +79,7 @@ GameMode:
       ; start of blue note code
       move.w (bluenote_position_y), d1                                         ; blue note position in d1
       btst #pad_button_B, d0                                                   ; Check B button
-      bne.s @NoB                                                               ; Branch if button off
+      beq.s @NoB                                                               ; Branch if button off
       cmp.w d2, d1                                                             ; is the player pressing too early
       blt.s @BlueNoteSafeArea                                                  ; if so then don't accept it
       move.w #note_start_position_y, d1
@@ -101,7 +101,7 @@ GameMode:
       ; start of orange note code
       move.w (orangenote_position_y), d1                                       ; orange note position in d1
       btst #pad_button_C, d0                                                   ; Check C button
-      bne.s @NoC                                                               ; Branch if button off
+      beq.s @NoC                                                               ; Branch if button off
       cmp.w d2, d1                                                             ; is the player pressing too early
       blt.s @OrangeNoteSafeArea                                                ; if so then don't accept it
       move.w #note_start_position_y, d1
